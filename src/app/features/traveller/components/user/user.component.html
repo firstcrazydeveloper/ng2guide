@@ -1,0 +1,33 @@
+﻿<div style="font-weight:bolder;">{{title}}</div>
+<p>Example of Pipe Pure/ Impure and Async</p><br />
+<p>
+    New User:
+    <input type="text" #box
+           (keyup.enter)="addUser(box.value); box.value=''"
+           placeholder="User name">
+    <input id="can-admin" type="checkbox" [(ngModel)]="canAdmin"> Can Admin
+</p>
+<p>
+    <input id="mutate" type="checkbox" [(ngModel)]="mutate">Mutate array
+    <button (click)="reset()">Reset</button>
+</p>
+<p style="font-weight:bolder;">User who admin (piped)</p>
+<div id="admin">
+    <div *ngFor="let user of (users | adminUsers)">
+        {{user.firstName}}
+    </div>
+</div>
+
+<p style="font-weight:bolder;">User who admin (impure piped)</p>
+<div id="admin">
+    <div *ngFor="let user of (users | adminUsersImpure)">
+        {{user.firstName}}
+    </div>
+</div>
+
+<p style="font-weight:bolder;">All Users (no pipe)</p>
+<div id="all">
+    <div *ngFor="let user of users">
+        {{user.firstName}}
+    </div>
+</div>

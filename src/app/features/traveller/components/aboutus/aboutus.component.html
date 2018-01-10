@@ -1,0 +1,13 @@
+﻿<div> My Latest Title: {{title}}</div><br />
+<div *ngIf="aboutData != undefined">
+    <div>First Name: {{aboutData.firstName}}</div><br />
+    <div>First Name: {{aboutData.lastName}}</div>
+</div>
+<br /><br />
+<input type="text" [(ngModel)]="testdata" /><br />
+<pre>{{testdata}}</pre><br /><br />
+<br />
+<button (click)="increase()" [disabled]="count>=100">Increase</button>
+<button (click)="decrease()" [disabled]="count==0">Decrease</button>
+<button (click)="attach()" >Attach</button>
+<button (click)="detach()" >Detach</button>

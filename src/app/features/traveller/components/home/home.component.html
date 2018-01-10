@@ -1,0 +1,14 @@
+﻿<div>Traveller Home Page</div>
+<br />
+<br />
+<p>Example of Attributes Directives</p>
+<div>
+    <input type="radio" name="colors" (click)="color='lightgreen'">Green
+    <input type="radio" name="colors" (click)="color='yellow'">Yellow
+    <input type="radio" name="colors" (click)="color='cyan'">Cyan
+</div>
+<p [appHighlight]="color">Highlight me!</p>
+
+<p [appHighlight]="color" defaultColor="green">
+    Highlight me too with Default Color!
+</p>

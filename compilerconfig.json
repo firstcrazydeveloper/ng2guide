@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "src/app/app.component.css",
+    "inputFile": "src/app/app.component.less"
+  },
+  {
+    "outputFile": "src/app/components/dashboard/dashboard.component.css",
+    "inputFile": "src/app/components/dashboard/dashboard.component.less"
+  }
+]

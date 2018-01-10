@@ -1,0 +1,178 @@
+﻿<div class="row" style="margin:0!important;">
+    <div class="col-12">
+        <a routerLink="/dashboard" routerLinkActive="active"> Back</a>
+    </div>
+</div>
+<br />
+<p> Example of Lazy Loading with Authguard</p>
+<p>Example of Reactive Form - Model Driven using FormGroup/ FormControl/ Validators/ FormBuilder/ FormArray </p><br />
+<div class="row" style="margin:0!important;">
+    <div class="col-12">
+        <div>Admin DashBoard</div>
+    </div>
+</div>
+<div class="row" style="margin:0!important;">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form novalidate [formGroup]="adminForm">
+            <div class="row">
+                <div class="col-12">
+                    <fieldset formGroupName="name">
+                        <div class="form-group"
+                             [ngClass]="{
+        'has-danger': firstName.invalid && (firstName.dirty || firstName.touched),
+        'has-success': firstName.valid && (firstName.dirty || firstName.touched)
+      }">
+                            <label>First Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   formControlName="firstName"
+                                   required>
+                            <div class="form-control-feedback"
+                                 *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+                                <p *ngIf="firstName.errors.required">First Name is required</p>
+                            </div>
+
+                            <!--
+                              <pre>Valid? {{ adminForm.controls.name.controls.firstName.valid }}</pre>
+                              <pre>Dirty? {{ adminForm.controls.name.controls.firstName.dirty }}</pre>
+                            -->
+                        </div>
+
+                        <div class="form-group"
+                             [ngClass]="{
+        'has-danger': lastName.invalid && (lastName.dirty || lastName.touched),
+        'has-success': lastName.valid && (lastName.dirty || lastName.touched)
+      }">
+                            <label>Last Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   formControlName="lastName"
+                                   required>
+                            <div class="form-control-feedback"
+                                 *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+                                <p *ngIf="lastName.errors.required">Last Name is required</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <div class="form-group"
+                         [ngClass]="{
+        'has-danger': email.invalid && (email.dirty || email.touched),
+        'has-success': email.valid && (email.dirty || email.touched)
+   }">
+                        <label>Email</label>
+                        <input type="email"
+                               class="form-control"
+                               formControlName="email"
+                               required>
+                        <div class="form-control-feedback"
+                             *ngIf="email.errors && (email.dirty || email.touched)">
+                            <p *ngIf="email.errors.required">Email is required</p>
+                            <p *ngIf="password.errors.pattern">The email address must contain at least the @ character</p>
+                        </div>
+
+                        <!--
+                          <pre>Valid? {{ adminForm.controls.email.valid }}</pre>
+                          <pre>Dirty? {{ adminForm.controls.email.dirty }}</pre>
+                        -->
+
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{
+        'has-danger': password.invalid && (password.dirty || password.touched),
+        'has-success': password.valid && (password.dirty || password.touched)
+   }">
+                        <label>Password</label>
+                        <input type="password"
+                               class="form-control"
+                               formControlName="password"
+                               required>
+                        <div class="form-control-feedback"
+                             *ngIf="password.errors && (password.dirty || password.touched)">
+                            <p *ngIf="password.errors.required">
+                                Password is required
+
+                            </p>
+                            <p *ngIf="password.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                        </div>
+                    </div>
+
+                    <!--
+                      <pre>{{ password.errors | json }}</pre>
+                    -->
+
+                    <div class="form-group"
+                         [ngClass]="{
+        'has-danger': language.invalid && (language.dirty || language.touched),
+        'has-success': language.valid && (language.dirty || language.touched)
+      }">
+                        <label>Language</label>
+                        <select class="form-control"
+                                formControlName="language">
+                            <option value="">Please select a language</option>
+                            <option *ngFor="let lang of langs"
+                                    [value]="lang">
+                                {{lang}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!--<pre>{{adminForm.value | json}}</pre>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <span> Property List</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <!-- list of addresses -->
+                    <div formArrayName="properties" formGroupName="properties" style="border:1px solid gray;padding:5px;padding-top:20px;padding-bottom:20px;margin-bottom:10px;">
+                        <div *ngFor="let property of adminForm['controls'].properties['controls']; let i=index" class="row" style="padding-bottom:5px;padding-top:5px;">
+                            <!-- address header, show remove button when more than one address available -->
+                            <div class="col-3" style="cursor:pointer;">
+                                <span (click)="removeProperty(i)" *ngIf="adminForm.controls.properties.controls.length > 1"> X </span>
+                                <span>{{i + 1}}.</span>
+                            </div>
+
+                            <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                            <div [formGroupName]="i" class="col-9">
+                                <div class="row">
+                                    <!--street-->
+                                    <div class="col-6">
+                                        <input type="text" formControlName="name" placeholder="Enter Name">
+                                        <!--display error message if street is not valid-->
+                                        <!--<small [hidden]="adminForm.controls.properties.controls[i].controls.name.valid">
+                                            Name is required
+                                        </small>-->
+                                    </div>
+                                    <!--postcode-->
+                                    <div class="col-6">
+
+                                        <input type="text" formControlName="postcode" placeholder="Enter Postal">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-3"></div>
+</div>
+<div class="row" style="margin:0!important">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div>
+            <button class="btn btn-sm btn-primary" type="button" (click)="addProperty()" style="margin-right:5px;">Add property</button>
+            <button class="btn btn-sm btn-primary" type="button" (click)="addAdminUser()" [disabled]="!adminForm.valid">Create User</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="reset()" [disabled]="!adminForm.touched">Clear</button>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>

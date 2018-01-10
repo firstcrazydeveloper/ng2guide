@@ -1,0 +1,48 @@
+﻿<div class="row">
+    <div class="col-12">
+        <a routerLink="/traveller" routerLinkActive="active"> Traveller</a><br />
+        <a routerLink="/admin" routerLinkActive="active"> Admin</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div>WelCome DashBoard</div>
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:20px;">
+    <div class="col-12">
+        <label> Enter Title: </label>
+        <input type="text" [(ngModel)]="title" placeholder="enter Title" />
+
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:20px;">
+    <div class="col-12">
+        <label> Enter First Name: </label>
+        <input type="text" [(ngModel)]="aboutUs.firstName" placeholder="First Name" />
+
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:20px;">
+    <div class="col-12">
+        <label> Enter Last Name: </label>
+        <input type="text" [(ngModel)]="aboutUs.lastName" placeholder="Last Name" />
+
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:20px;">
+    <div class="col-12">
+        Child Component
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:20px;">
+    <div class="col-12">
+        <aboutus [title]="title" [aboutData]="aboutUs" (increaseValue)="increaseValue($event)" (decreaseValue)="decreaseValue($event)"></aboutus>
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-left:20px;">
+    <div class="col-12">
+       Updated Count from Child Component: {{count}}
+    </div>
+</div>
+
